@@ -41,19 +41,23 @@ function requestListener(req, res) {
 
   if (urlParts[0] === "api" && urlParts[1] === "items") {
     if (method === "GET" && urlParts.length === 2) {
+    
       // Get all items
       return getAllItems(res);
     } else if (method === "GET" && urlParts.length === 3) {
+    
       // Get one item by ID
       const id = urlParts[2];
       return getItemById(res, id);
     } else if (method === "POST" && urlParts.length === 2) {
+     
       // Create a new item
       let body = "";
       req.on("data", (chunk) => (body += chunk));
       req.on("end", () => createItem(res, body));
       return;
     } else if (method === "PUT" && urlParts.length === 3) {
+      
       // Update an item by ID
       const id = urlParts[2];
       let body = "";
@@ -61,6 +65,7 @@ function requestListener(req, res) {
       req.on("end", () => updateItem(res, id, body));
       return;
     } else if (method === "DELETE" && urlParts.length === 3) {
+     
       // Delete an item by ID
       const id = urlParts[2];
       return deleteItem(res, id);
